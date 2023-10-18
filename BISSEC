@@ -1,0 +1,47 @@
+#include <iostream>
+#include <cmath>
+#include <fstream>
+
+#define N 50
+
+using namespace std;
+
+float calc(float x) {
+    return (pow(x, 3) - 10);
+}
+
+int main() {
+    int K = 0;
+    float FINICIO, MEIO, FMEIO, A = 2, B = 3, PRECISAO = 0.1;
+
+    ofstream outputFile("output.txt");
+
+    if (outputFile.is_open()) {
+        if (fabs(B - A) < PRECISAO) {
+            cout << A << endl;
+        } else {
+            while (fabs(B - A) > PRECISAO && K < N) {
+                K++;
+                FINICIO = calc(A);
+                MEIO = (A + B) / 2;
+                FMEIO = calc(MEIO);
+
+                outputFile << "ITERAÇÃO " << K << ": A = " << A << ", B = " << B << ", MEIO = " << MEIO << ", K = " << K << endl;
+                outputFile << "--------------------------------------------------------" << endl;
+
+                if (FINICIO * FMEIO < 0) {
+                    B = MEIO;
+                } else {
+                    A = MEIO;
+                }
+            }
+        }
+
+        cout << MEIO << endl << K << endl;
+
+        outputFile.close(); 
+    } 
+    else{
+        cerr << "Erro ao abrir o arquivo de saída." << endl;
+    }
+}
