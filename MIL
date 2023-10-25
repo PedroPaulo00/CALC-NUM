@@ -1,0 +1,49 @@
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
+using namespace std;
+
+float func(float x){
+    return pow(x, 3)-(9.0*x)+3.0;
+}
+
+float fi(float x){
+    return (pow(x,3)/9.0)+(1.0/3.0);
+}
+
+void Mil(){
+    float x, x1, press, epsilon;
+    int it, k;
+    
+    cout << "aprox inicial" << endl;
+    cin >> x;
+    cout << "precisao" << endl;
+    cin >> press;
+    cout << "n de iteracoes" << endl;
+    cin >> it;
+    
+    if(fabs(func(x)) < press){
+        cout << x << endl;
+    }
+    else{
+        k = 1;
+        
+        while(k < it){
+            x1 = fi(x);
+        
+        if(fabs(func(x1)) < press || fabs((x1-x)) || k > it){
+            cout << x1 << endl;
+        }
+        else{
+            x = x1;
+            k+= 1;
+        }
+            
+        }
+    }
+}
+
+int main(){
+    Mil();
+}
